@@ -1,0 +1,17 @@
+{
+    "nombre": "prueba1",
+    "ubicacion": [
+        38.35932493255437,
+        -0.3031081739421642
+    ],
+    "distancia": "2.15 km",
+    "duracion": "25 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-04-08 12:39:09",
+    "origen": "Avenida de Maisonnave",
+    "puntos_intermedios": [
+        "Plaza de los Luceros"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "walk"
+}

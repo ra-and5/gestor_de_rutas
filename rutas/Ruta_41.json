@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_41",
+    "ubicacion": [
+        38.383239451049384,
+        -0.45150184307735614
+    ],
+    "distancia": "5.04 km",
+    "duracion": "1 h 0 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:49:47",
+    "origen": "Puerto de Alicante",
+    "puntos_intermedios": [
+        "Calle San Vicente",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "walk"
+}

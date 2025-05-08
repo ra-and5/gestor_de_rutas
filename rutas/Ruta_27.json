@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_27",
+    "ubicacion": [
+        38.373540205391436,
+        -0.302349110107189
+    ],
+    "distancia": "4.80 km",
+    "duracion": "19 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:45:07",
+    "origen": "Puerto de Alicante",
+    "puntos_intermedios": [
+        "Calle de Ciriaco",
+        "Calle San Vicente"
+    ],
+    "destino": "Museo de Arte Contemporáneo de Alicante",
+    "modo_transporte": "bike"
+}

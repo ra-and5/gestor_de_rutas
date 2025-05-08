@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_21",
+    "ubicacion": [
+        38.397478425515466,
+        -0.47613633391652116
+    ],
+    "distancia": "2.07 km",
+    "duracion": "24 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:43:33",
+    "origen": "Playa del Postiguet",
+    "puntos_intermedios": [
+        "Calle del Teatro",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Museo de Arte Contemporáneo de Alicante",
+    "modo_transporte": "walk"
+}

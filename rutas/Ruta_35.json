@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_35",
+    "ubicacion": [
+        38.327282578088514,
+        -0.328542189757003
+    ],
+    "distancia": "1.81 km",
+    "duracion": "21 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:47:41",
+    "origen": "Mercado Central de Alicante",
+    "puntos_intermedios": [
+        "Mercado Central",
+        "Avenida de la Constitución"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "walk"
+}

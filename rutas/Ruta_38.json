@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_38",
+    "ubicacion": [
+        38.334192738381816,
+        -0.33453399509370374
+    ],
+    "distancia": "14.33 km",
+    "duracion": "57 min",
+    "dificultad": "medio",
+    "fecha_registro": "2025-03-27 13:48:51",
+    "origen": "Museo Arqueológico de Alicante",
+    "puntos_intermedios": [
+        "Plaza Mar 2",
+        "Avenida de Alicante"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "bike"
+}

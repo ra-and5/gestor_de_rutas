@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_7",
+    "ubicacion": [
+        38.33718278261435,
+        -0.32315666051402986
+    ],
+    "distancia": "2.07 km",
+    "duracion": "24 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:39:33",
+    "origen": "Parque de Canalejas",
+    "puntos_intermedios": [
+        "Mercado Central",
+        "Avenida de la Rambla"
+    ],
+    "destino": "El Corte Inglés",
+    "modo_transporte": "walk"
+}

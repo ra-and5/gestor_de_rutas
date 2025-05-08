@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_16",
+    "ubicacion": [
+        38.31075412191037,
+        -0.37863959340790876
+    ],
+    "distancia": "2.91 km",
+    "duracion": "34 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:42:14",
+    "origen": "Museo Arqueológico de Alicante",
+    "puntos_intermedios": [
+        "Calle del Teatro",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Plaza de Toros de Alicante",
+    "modo_transporte": "walk"
+}

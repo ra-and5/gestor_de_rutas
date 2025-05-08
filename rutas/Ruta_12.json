@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_12",
+    "ubicacion": [
+        38.390107470266464,
+        -0.3964078350669722
+    ],
+    "distancia": "1.84 km",
+    "duracion": "22 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:41:05",
+    "origen": "Plaza de los Luceros",
+    "puntos_intermedios": [
+        "Avenida de la Rambla",
+        "Calle San Vicente"
+    ],
+    "destino": "El Corte Inglés",
+    "modo_transporte": "walk"
+}

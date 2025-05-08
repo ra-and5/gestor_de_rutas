@@ -1,0 +1,17 @@
+{
+    "nombre": "ruta_manual_4275",
+    "ubicacion": [
+        38.3120533210597,
+        -0.45178101265458037
+    ],
+    "distancia": "1.85 km",
+    "duracion": "22 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-31 09:51:15",
+    "origen": "Playa del Postiguet",
+    "puntos_intermedios": [
+        "Avenida de Maisonnave"
+    ],
+    "destino": "Plaza de los Luceros",
+    "modo_transporte": "walk"
+}

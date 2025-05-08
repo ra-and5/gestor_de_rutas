@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_28",
+    "ubicacion": [
+        38.341253703079154,
+        -0.42413555759935495
+    ],
+    "distancia": "2.69 km",
+    "duracion": "5 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:45:25",
+    "origen": "Parque de Canalejas",
+    "puntos_intermedios": [
+        "Plaza de los Luceros",
+        "Avenida de la Constitución"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "drive"
+}

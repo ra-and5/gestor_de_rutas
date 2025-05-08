@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_36",
+    "ubicacion": [
+        38.32183747471238,
+        -0.4226999307166522
+    ],
+    "distancia": "13.31 km",
+    "duracion": "2 h 39 min",
+    "dificultad": "medio",
+    "fecha_registro": "2025-03-27 13:48:04",
+    "origen": "Centro Comercial Plaza Mar 2",
+    "puntos_intermedios": [
+        "Avenida de Alicante",
+        "Calle San Vicente"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "walk"
+}

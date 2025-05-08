@@ -1,0 +1,5 @@
+Marta -> gestor_rutas.py, ruta.py, api/__init__ y rutas.py
+Germán -> usuario.py, usuarios.json, requeriments.txt, api/usuarios
+Marcos -> interfaz.py, utils.py, static/, Readme.md, tests/
+David -> ruta_auto.py, main.py, rutas/, app.instance.py, run.py
+Rares -> servicio_clima.py, ruta_manual.py, geocodificador.py, api/clima

@@ -1,0 +1,15 @@
+{
+    "nombre": "ruta_manual_8244",
+    "ubicacion": [
+        38.334591007045645,
+        -0.30585816549474015
+    ],
+    "distancia": "1.64 km",
+    "duracion": "19 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-31 10:15:22",
+    "origen": "Plaza de los Luceros",
+    "puntos_intermedios": [],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "walk"
+}

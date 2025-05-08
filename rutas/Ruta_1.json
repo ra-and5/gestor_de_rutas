@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_1",
+    "ubicacion": [
+        38.33037708594684,
+        -0.42876455197187063
+    ],
+    "distancia": "5.62 km",
+    "duracion": "1 h 7 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:38:03",
+    "origen": "Mercado Central de Alicante",
+    "puntos_intermedios": [
+        "Avenida de la Constitución",
+        "Hospital General Universitario de Alicante"
+    ],
+    "destino": "El Corte Inglés",
+    "modo_transporte": "walk"
+}

@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_29",
+    "ubicacion": [
+        38.3857532936811,
+        -0.37553279545491025
+    ],
+    "distancia": "15.18 km",
+    "duracion": "3 h 2 min",
+    "dificultad": "medio",
+    "fecha_registro": "2025-03-27 13:45:43",
+    "origen": "Plaza de los Luceros",
+    "puntos_intermedios": [
+        "Avenida de Alicante",
+        "Hospital General Universitario de Alicante"
+    ],
+    "destino": "Plaza Mar 2",
+    "modo_transporte": "walk"
+}

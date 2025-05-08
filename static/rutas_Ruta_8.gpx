@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
+  <trk>
+    <name>Ruta 1</name>
+    <trkseg>
+      <trkpt lat="38.3477352" lon="-0.4861145">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3476557" lon="-0.4860728">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3478485" lon="-0.4855443">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.348097" lon="-0.4848704">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3481828" lon="-0.4848782">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3484449" lon="-0.4848729">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3486258" lon="-0.4848692">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3496267" lon="-0.4848238">
+        <ele>0</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>
+    <name>Ruta 2</name>
+    <trkseg>
+      <trkpt lat="38.3496267" lon="-0.4848238">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3496426" lon="-0.4857289">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3489122" lon="-0.4859282">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3485858" lon="-0.4860071">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3479105" lon="-0.485644">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3477352" lon="-0.4861145">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3476289" lon="-0.4864075">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3474717" lon="-0.4868331">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.347281" lon="-0.4873378">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3470866" lon="-0.4878545">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3469227" lon="-0.4883122">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3467755" lon="-0.4886854">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3464815" lon="-0.4894844">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3463441" lon="-0.4895761">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3456101" lon="-0.4890674">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3452795" lon="-0.4899878">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3452671" lon="-0.4900254">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.345185" lon="-0.4902024">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3451692" lon="-0.4902399">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3447793" lon="-0.4911242">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3443762" lon="-0.4920181">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.343821" lon="-0.4916104">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3440104" lon="-0.491189">
+        <ele>0</ele>
+      </trkpt>
+      <trkpt lat="38.3442096" lon="-0.4907057">
+        <ele>0</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

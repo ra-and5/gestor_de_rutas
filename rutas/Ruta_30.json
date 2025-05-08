@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_30",
+    "ubicacion": [
+        38.37505549621971,
+        -0.39282628563980015
+    ],
+    "distancia": "1.82 km",
+    "duracion": "3 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:46:05",
+    "origen": "Mercado Central de Alicante",
+    "puntos_intermedios": [
+        "Avenida de la Rambla",
+        "Plaza de los Luceros"
+    ],
+    "destino": "Parque de la Ereta",
+    "modo_transporte": "drive"
+}

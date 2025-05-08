@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_44",
+    "ubicacion": [
+        38.30404129814032,
+        -0.46294205393840687
+    ],
+    "distancia": "13.76 km",
+    "duracion": "55 min",
+    "dificultad": "medio",
+    "fecha_registro": "2025-03-27 13:50:47",
+    "origen": "Puerto de Alicante",
+    "puntos_intermedios": [
+        "Avenida de Alicante",
+        "Avenida de la Rambla"
+    ],
+    "destino": "Hospital General Universitario de Alicante",
+    "modo_transporte": "bike"
+}

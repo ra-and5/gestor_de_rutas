@@ -1,0 +1,361 @@
+[
+    {
+        "nombre": "Antonio",
+        "apellido": "Pérez",
+        "email": "antonio@example.com",
+        "username": "tony_perez",
+        "password": "password123",
+        "telefono": "600-123456",
+        "fecha_nacimiento": "1995-08-22",
+        "ciudad": "Alicante",
+        "fecha_registro": "2025-03-25T12:12:20.318521",
+        "amigos": [
+            "maria_gomez",
+            "carlos_lopez"
+        ],
+        "rutas": [
+            "Ruta_7",
+            "Ruta_25",
+            "Ruta_1",
+            "Ruta_21",
+            "Ruta_22",
+            "Ruta_36"
+        ]
+    },
+    {
+        "nombre": "María",
+        "apellido": "Gómez",
+        "email": "maria@example.com",
+        "username": "maria_gomez",
+        "password": "pass456",
+        "telefono": "610-654321",
+        "fecha_nacimiento": "1998-03-10",
+        "ciudad": "Alicante",
+        "fecha_registro": "2025-03-25T12:12:20.318529",
+        "amigos": [
+            "tony_perez",
+            "carlos_lopez"
+        ],
+        "rutas": [
+            "Ruta_10",
+            "Ruta_14",
+            "Ruta_8",
+            "Ruta_23",
+            "Ruta_19",
+            "Ruta_22"
+        ]
+    },
+    {
+        "nombre": "Carlos",
+        "apellido": "López",
+        "email": "carlos@example.com",
+        "username": "carlos_lopez",
+        "password": "clave789",
+        "telefono": "620-987654",
+        "fecha_nacimiento": "1992-07-15",
+        "ciudad": "Madrid",
+        "fecha_registro": "2025-03-25T12:12:20.318531",
+        "amigos": [
+            "tony_perez",
+            "maria_gomez"
+        ],
+        "rutas": [
+            "Ruta_48",
+            "Ruta_31",
+            "Ruta_12",
+            "Ruta_2",
+            "Ruta_13",
+            "Ruta_10"
+        ]
+    },
+    {
+        "nombre": "Laura",
+        "apellido": "Fernández",
+        "email": "laura@example.com",
+        "username": "laura_fernandez",
+        "password": "mipass123",
+        "telefono": "630-456789",
+        "fecha_nacimiento": "2000-05-25",
+        "ciudad": "Barcelona",
+        "fecha_registro": "2025-03-25T12:12:20.318532",
+        "amigos": [
+            "javier_rod",
+            "sofia_mtz"
+        ],
+        "rutas": [
+            "Ruta_2",
+            "Ruta_45",
+            "Ruta_38",
+            "Ruta_11",
+            "Ruta_18",
+            "Ruta_43"
+        ]
+    },
+    {
+        "nombre": "Javier",
+        "apellido": "Rodríguez",
+        "email": "javier@example.com",
+        "username": "javier_rod",
+        "password": "superclave",
+        "telefono": "640-123789",
+        "fecha_nacimiento": "1987-09-30",
+        "ciudad": "Valencia",
+        "fecha_registro": "2025-03-25T12:12:20.318534",
+        "amigos": [
+            "laura_fernandez",
+            "sofia_mtz"
+        ],
+        "rutas": [
+            "Ruta_25",
+            "Ruta_14",
+            "Ruta_2",
+            "Ruta_10",
+            "Ruta_29",
+            "Ruta_35"
+        ]
+    },
+    {
+        "nombre": "rares",
+        "apellido": "ra",
+        "email": "ram58@alu.ua.es",
+        "username": "rare",
+        "telefono": "627618415",
+        "fecha_nacimiento": "1994-07-22",
+        "ciudad": "brasov",
+        "password": "admin",
+        "fecha_registro": "2025-05-07T20:58:55.214358",
+        "amigos": [
+            "david_sanchez",
+            "isabel_diaz"
+        ],
+        "rutas": [
+            "Ruta_11",
+            "Ruta_27",
+            "Ruta_13",
+            "Ruta_10",
+            "Ruta_34",
+            "Ruta_49"
+        ]
+    },
+    {
+        "nombre": "Sofía",
+        "apellido": "Martínez",
+        "email": "sofia@example.com",
+        "username": "sofia_mtz",
+        "password": "pass2024",
+        "telefono": "650-321456",
+        "fecha_nacimiento": "1995-11-05",
+        "ciudad": "Sevilla",
+        "fecha_registro": "2025-03-25T12:12:20.318535",
+        "amigos": [
+            "laura_fernandez",
+            "javier_rod"
+        ],
+        "rutas": [
+            "Ruta_26",
+            "Ruta_38",
+            "Ruta_46",
+            "Ruta_42",
+            "Ruta_40"
+        ]
+    },
+    {
+        "nombre": "David",
+        "apellido": "Sánchez",
+        "email": "david@example.com",
+        "username": "david_sanchez",
+        "password": "qwerty789",
+        "telefono": "660-654987",
+        "fecha_nacimiento": "1993-04-18",
+        "ciudad": "Bilbao",
+        "fecha_registro": "2025-03-25T12:12:20.318537",
+        "amigos": [
+            "isabel_diaz",
+            "lucia_morales"
+        ],
+        "rutas": [
+            "Ruta_48",
+            "Ruta_17",
+            "Ruta_25",
+            "Ruta_30",
+            "Ruta_27"
+        ]
+    },
+    {
+        "nombre": "Isabel",
+        "apellido": "Díaz",
+        "email": "isabel@example.com",
+        "username": "isabel_diaz",
+        "password": "xyz987",
+        "telefono": "670-789123",
+        "fecha_nacimiento": "1996-12-22",
+        "ciudad": "Málaga",
+        "fecha_registro": "2025-03-25T12:12:20.318538",
+        "amigos": [
+            "david_sanchez",
+            "lucia_morales"
+        ],
+        "rutas": [
+            "Ruta_17",
+            "Ruta_15",
+            "Ruta_7",
+            "Ruta_25",
+            "Ruta_34",
+            "Ruta_43"
+        ]
+    },
+    {
+        "nombre": "Lucía",
+        "apellido": "Morales",
+        "email": "lucia@example.com",
+        "username": "lucia_morales",
+        "password": "passlucia",
+        "telefono": "710-852963",
+        "fecha_nacimiento": "1999-08-27",
+        "ciudad": "Valladolid",
+        "fecha_registro": "2025-03-25T12:12:20.318544",
+        "amigos": [
+            "david_sanchez",
+            "isabel_diaz"
+        ],
+        "rutas": [
+            "Ruta_11",
+            "Ruta_27",
+            "Ruta_13",
+            "Ruta_10",
+            "Ruta_34",
+            "Ruta_49"
+        ]
+    },
+    {
+        "nombre": "Marcos",
+        "apellido": "Frances",
+        "email": "mfr73@alu.ua.es",
+        "username": "mfr73",
+        "telefono": "640900800",
+        "fecha_nacimiento": "2005-09-09",
+        "ciudad": "Caudete",
+        "password": "prueba",
+        "fecha_registro": null,
+        "amigos": [
+            "lucia_morales"
+        ],
+        "rutas": [
+            "Ruta_11",
+            "Ruta_27",
+            "ruta_manual_8244",
+            "prueba1"
+        ]
+    },
+    {
+        "nombre": "Luis",
+        "apellido": "García",
+        "email": "luis@example.com",
+        "username": "luis_garcia",
+        "telefono": "650123123",
+        "fecha_nacimiento": "1994-06-15",
+        "ciudad": "Alicante",
+        "password": "contraseña456",
+        "fecha_registro": "2025-04-01T12:33:24.169783",
+        "rutas": [
+            "Ruta_16",
+            "Ruta_43",
+            "ruta_manual_8244",
+            "ruta_demo_luis",
+            "ruta_demo_luis",
+            "ruta_demo_luis",
+            "ruta_demo_luis",
+            "ruta_demo_luis",
+            "ruta_demo_luis"
+        ]
+    },
+    {
+        "nombre": "Carla",
+        "apellido": "Méndez",
+        "email": "carla@example.com",
+        "username": "carla_mendez",
+        "telefono": "660987654",
+        "fecha_nacimiento": "1992-11-03",
+        "ciudad": "Valencia",
+        "password": "carla1234",
+        "fecha_registro": "2025-04-02T12:46:29.362731",
+        "rutas": [
+            "Ruta_1",
+            "Ruta_10",
+            "Ruta_18",
+            "Ruta_35",
+            "alicante_carla_walk",
+            "alicante_carla_walk"
+        ]
+    },
+    {
+        "nombre": "Paula",
+        "apellido": "Martín",
+        "email": "paula@example.com",
+        "username": "paula_martin",
+        "telefono": "600111111",
+        "fecha_nacimiento": "1990-01-01",
+        "ciudad": "Alicante",
+        "password": "paula123",
+        "fecha_registro": "2025-04-02T13:21:20.610636",
+        "rutas": [
+            "alicante_ruta_paula",
+            "alicante_ruta_paula"
+        ]
+    },
+    {
+        "nombre": "Jorge",
+        "apellido": "Sánchez",
+        "email": "jorge@example.com",
+        "username": "jorge_sanchez",
+        "telefono": "600222222",
+        "fecha_nacimiento": "1990-01-01",
+        "ciudad": "Alicante",
+        "password": "jorge123",
+        "fecha_registro": "2025-04-03T11:19:26.447292",
+        "rutas": [
+            "alicante_bike_jorge",
+            "alicante_bike_jorge",
+            "alicante_bike_jorge",
+            "alicante_bike_jorge",
+            "alicante_bike_jorge",
+            "alicante_bike_jorge"
+        ]
+    },
+    {
+        "nombre": "Inés",
+        "apellido": "López",
+        "email": "ines@example.com",
+        "username": "ines_lopez",
+        "telefono": "600333333",
+        "fecha_nacimiento": "1990-01-01",
+        "ciudad": "Alicante",
+        "password": "ines123",
+        "fecha_registro": "2025-04-03T11:32:21.692104",
+        "rutas": []
+    },
+    {
+        "nombre": "Ana",
+        "apellido": "López",
+        "email": "ana@example.com",
+        "username": "ana_lopez",
+        "telefono": "600333333",
+        "fecha_nacimiento": "1992-05-10",
+        "ciudad": "Alicante",
+        "password": "ana123",
+        "fecha_registro": "2025-04-03T13:52:46.872775",
+        "rutas": []
+    },
+    {
+        "nombre": "Andrés",
+        "apellido": "Francés",
+        "email": "andres@email.com",
+        "username": "afp33",
+        "telefono": "666555444",
+        "fecha_nacimiento": "2005-12-05",
+        "ciudad": "Villena",
+        "password": "prueba",
+        "fecha_registro": "2025-04-08T13:27:29.141178",
+        "rutas": []
+    }
+]

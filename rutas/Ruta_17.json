@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_17",
+    "ubicacion": [
+        38.37448262969209,
+        -0.3992662841335062
+    ],
+    "distancia": "2.57 km",
+    "duracion": "5 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:42:37",
+    "origen": "Plaza de los Luceros",
+    "puntos_intermedios": [
+        "Calle de Ciriaco",
+        "Calle San Vicente"
+    ],
+    "destino": "Plaza Mar 2",
+    "modo_transporte": "drive"
+}

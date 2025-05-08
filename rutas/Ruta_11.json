@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_11",
+    "ubicacion": [
+        38.34941242432394,
+        -0.49431775629289826
+    ],
+    "distancia": "16.79 km",
+    "duracion": "3 h 21 min",
+    "dificultad": "medio",
+    "fecha_registro": "2025-03-27 13:40:40",
+    "origen": "Centro Comercial Gran Vía Alicante",
+    "puntos_intermedios": [
+        "Avenida de la Constitución",
+        "Avenida de Alicante"
+    ],
+    "destino": "Museo de Arte Contemporáneo de Alicante",
+    "modo_transporte": "walk"
+}

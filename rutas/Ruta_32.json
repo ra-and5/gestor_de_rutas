@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_32",
+    "ubicacion": [
+        38.30384533970859,
+        -0.31856102918499113
+    ],
+    "distancia": "4.12 km",
+    "duracion": "8 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:46:42",
+    "origen": "Playa del Postiguet",
+    "puntos_intermedios": [
+        "Avenida de la Rambla",
+        "Plaza de los Luceros"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "drive"
+}

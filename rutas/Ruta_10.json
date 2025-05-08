@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_10",
+    "ubicacion": [
+        38.30389419780642,
+        -0.44960093870068063
+    ],
+    "distancia": "2.03 km",
+    "duracion": "4 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:40:24",
+    "origen": "Parque de Canalejas",
+    "puntos_intermedios": [
+        "Avenida de la Constitución",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Plaza de Toros de Alicante",
+    "modo_transporte": "drive"
+}

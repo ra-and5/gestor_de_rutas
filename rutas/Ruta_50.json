@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_50",
+    "ubicacion": [
+        38.35631796275474,
+        -0.42703440762359235
+    ],
+    "distancia": "1.41 km",
+    "duracion": "2 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:52:20",
+    "origen": "La Explanada de España",
+    "puntos_intermedios": [
+        "Avenida de la Rambla",
+        "Mercado Central"
+    ],
+    "destino": "Plaza de Toros de Alicante",
+    "modo_transporte": "drive"
+}

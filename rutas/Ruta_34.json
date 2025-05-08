@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_34",
+    "ubicacion": [
+        38.397157245189526,
+        -0.3046303180690819
+    ],
+    "distancia": "4.09 km",
+    "duracion": "8 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:47:23",
+    "origen": "Centro Comercial Plaza Mar 2",
+    "puntos_intermedios": [
+        "Calle del Teatro",
+        "Plaza Mar 2"
+    ],
+    "destino": "Plaza Mar 2",
+    "modo_transporte": "drive"
+}

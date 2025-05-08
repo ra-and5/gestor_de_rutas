@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_8",
+    "ubicacion": [
+        38.37192746792693,
+        -0.42547202111984295
+    ],
+    "distancia": "1.51 km",
+    "duracion": "6 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:39:54",
+    "origen": "Mercado Central de Alicante",
+    "puntos_intermedios": [
+        "Avenida de la Rambla",
+        "Calle San Vicente"
+    ],
+    "destino": "El Corte Inglés",
+    "modo_transporte": "bike"
+}

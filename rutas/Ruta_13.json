@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_13",
+    "ubicacion": [
+        38.30390475367528,
+        -0.3735052416198935
+    ],
+    "distancia": "3.49 km",
+    "duracion": "13 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:41:26",
+    "origen": "Mercado Central de Alicante",
+    "puntos_intermedios": [
+        "Plaza Mar 2",
+        "Avenida de la Rambla"
+    ],
+    "destino": "Plaza de Toros de Alicante",
+    "modo_transporte": "bike"
+}

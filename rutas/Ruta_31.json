@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_31",
+    "ubicacion": [
+        38.38928781388785,
+        -0.3235835885261053
+    ],
+    "distancia": "3.04 km",
+    "duracion": "12 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:46:22",
+    "origen": "Centro Comercial Plaza Mar 2",
+    "puntos_intermedios": [
+        "Calle San Vicente",
+        "Plaza de los Luceros"
+    ],
+    "destino": "El Corte Inglés",
+    "modo_transporte": "bike"
+}

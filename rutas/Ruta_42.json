@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_42",
+    "ubicacion": [
+        38.338064024476765,
+        -0.49254263217217387
+    ],
+    "distancia": "4.54 km",
+    "duracion": "18 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:50:07",
+    "origen": "Castillo de Santa Bárbara",
+    "puntos_intermedios": [
+        "Plaza de los Luceros",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Playa del Postiguet",
+    "modo_transporte": "bike"
+}

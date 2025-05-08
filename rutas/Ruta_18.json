@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_18",
+    "ubicacion": [
+        38.38245200328598,
+        -0.482153023887317
+    ],
+    "distancia": "4.13 km",
+    "duracion": "16 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:42:54",
+    "origen": "Centro Comercial Plaza Mar 2",
+    "puntos_intermedios": [
+        "Calle del Teatro",
+        "Calle San Vicente"
+    ],
+    "destino": "El Corte Inglés",
+    "modo_transporte": "bike"
+}

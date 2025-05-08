@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_37",
+    "ubicacion": [
+        38.33425260803566,
+        -0.39490321169217424
+    ],
+    "distancia": "6.23 km",
+    "duracion": "1 h 14 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:48:28",
+    "origen": "Playa del Postiguet",
+    "puntos_intermedios": [
+        "Mercado Central",
+        "Avenida de la Constitución"
+    ],
+    "destino": "Playa de la Albufereta",
+    "modo_transporte": "walk"
+}

@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_2",
+    "ubicacion": [
+        38.32058348150703,
+        -0.3931002094182935
+    ],
+    "distancia": "8.25 km",
+    "duracion": "32 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:38:25",
+    "origen": "Puerto de Alicante",
+    "puntos_intermedios": [
+        "Mercado Central",
+        "Avenida de la Constitución"
+    ],
+    "destino": "Playa de la Albufereta",
+    "modo_transporte": "bike"
+}

@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_43",
+    "ubicacion": [
+        38.31375530936676,
+        -0.3211448658332794
+    ],
+    "distancia": "4.32 km",
+    "duracion": "51 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:50:26",
+    "origen": "Playa del Postiguet",
+    "puntos_intermedios": [
+        "Plaza Mar 2",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Playa de la Albufereta",
+    "modo_transporte": "walk"
+}

@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_47",
+    "ubicacion": [
+        38.30361835444815,
+        -0.4951925510158668
+    ],
+    "distancia": "16.05 km",
+    "duracion": "1 h 4 min",
+    "dificultad": "medio",
+    "fecha_registro": "2025-03-27 13:51:30",
+    "origen": "Centro Comercial Plaza Mar 2",
+    "puntos_intermedios": [
+        "Calle San Vicente",
+        "Avenida de Alicante"
+    ],
+    "destino": "Parque de la Ereta",
+    "modo_transporte": "bike"
+}

@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_33",
+    "ubicacion": [
+        38.37726788408822,
+        -0.35707256675071375
+    ],
+    "distancia": "4.84 km",
+    "duracion": "58 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:46:59",
+    "origen": "Centro Comercial Gran Vía Alicante",
+    "puntos_intermedios": [
+        "Hospital General Universitario de Alicante",
+        "Avenida de la Constitución"
+    ],
+    "destino": "Parque de la Ereta",
+    "modo_transporte": "walk"
+}

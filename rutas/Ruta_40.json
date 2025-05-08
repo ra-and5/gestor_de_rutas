@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_40",
+    "ubicacion": [
+        38.380420735553486,
+        -0.48379467519772884
+    ],
+    "distancia": "3.56 km",
+    "duracion": "42 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:49:23",
+    "origen": "Centro Comercial Plaza Mar 2",
+    "puntos_intermedios": [
+        "Calle del Teatro",
+        "Avenida de la Constitución"
+    ],
+    "destino": "Plaza de Toros de Alicante",
+    "modo_transporte": "walk"
+}

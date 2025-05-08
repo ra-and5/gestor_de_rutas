@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_26",
+    "ubicacion": [
+        38.3538484031104,
+        -0.3675305259190844
+    ],
+    "distancia": "6.45 km",
+    "duracion": "25 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:44:48",
+    "origen": "Mercado Central de Alicante",
+    "puntos_intermedios": [
+        "Hospital General Universitario de Alicante",
+        "Calle de Ciriaco"
+    ],
+    "destino": "Playa de la Albufereta",
+    "modo_transporte": "bike"
+}

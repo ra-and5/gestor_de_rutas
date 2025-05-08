@@ -1,0 +1,18 @@
+{
+    "nombre": "Ruta_24",
+    "ubicacion": [
+        38.35788251245873,
+        -0.3642611108684239
+    ],
+    "distancia": "5.26 km",
+    "duracion": "1 h 3 min",
+    "dificultad": "bajo",
+    "fecha_registro": "2025-03-27 13:44:15",
+    "origen": "Playa del Postiguet",
+    "puntos_intermedios": [
+        "Calle de Ciriaco",
+        "Hospital General Universitario de Alicante"
+    ],
+    "destino": "Museo de Arte Contemporáneo de Alicante",
+    "modo_transporte": "walk"
+}
