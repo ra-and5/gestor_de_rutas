@@ -1,197 +1,162 @@
 import json
 import sqlite3
+import os
 from datetime import datetime
 
+# Rutas absolutas
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'usuarios.db')
+JSON_PATH = os.path.join(BASE_DIR, 'usuarios.json')
+
 def crear_tablas():
-    conn = sqlite3.connect('miapp.db')
+    """
+    Crea las tablas necesarias en la base de datos SQLite.
+
+    Returns
+    -------
+    sqlite3.Connection
+        Conexión activa a la base de datos con las tablas creadas.
+    """
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    
-    # Eliminar tablas existentes si existen
-    cursor.execute('DROP TABLE IF EXISTS amistades')
+    cursor.execute('DROP TABLE IF EXISTS usuario_rutas')
     cursor.execute('DROP TABLE IF EXISTS rutas')
     cursor.execute('DROP TABLE IF EXISTS usuarios')
-    
-    # Crear tabla de usuarios
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS usuarios (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT NOT NULL,
-        apellido TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        telefono TEXT NOT NULL,
-        fecha_nacimiento TEXT NOT NULL,
-        ciudad TEXT NOT NULL,
-        fecha_registro TEXT NOT NULL
-    )
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            apellido TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            username TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            telefono TEXT,
+            fecha_nacimiento TEXT,
+            ciudad TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
     ''')
-    
-    # Crear tabla de rutas
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS rutas (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT UNIQUE NOT NULL,
-        descripcion TEXT,
-        distancia REAL,
-        duracion INTEGER,
-        dificultad TEXT,
-        puntos_interes TEXT,
-        origen TEXT,
-        destino TEXT,
-        modo_transporte TEXT,
-        fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
+        CREATE TABLE IF NOT EXISTS rutas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT UNIQUE NOT NULL,
+            origen TEXT NOT NULL,
+            destino TEXT NOT NULL,
+            puntos_intermedios TEXT,
+            modo TEXT DEFAULT 'walk',
+            distancia_km REAL,
+            duracion_horas REAL,
+            dificultad TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            creador TEXT
+        )
     ''')
-    
-    # Crear tabla de amistades
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS amistades (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario_id INTEGER NOT NULL,
-        amigo_id INTEGER NOT NULL,
-        fecha_amistad TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (usuario_id) REFERENCES usuarios (id),
-        FOREIGN KEY (amigo_id) REFERENCES usuarios (id),
-        UNIQUE(usuario_id, amigo_id)
-    )
+        CREATE TABLE IF NOT EXISTS usuario_rutas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario_id INTEGER NOT NULL,
+            nombre_ruta TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+            FOREIGN KEY (nombre_ruta) REFERENCES rutas(nombre),
+            UNIQUE(usuario_id, nombre_ruta)
+        )
     ''')
-    
-    # Crear tabla de rutas de usuario (relación muchos a muchos)
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS rutas_usuario (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario_id INTEGER NOT NULL,
-        ruta_id INTEGER NOT NULL,
-        fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (usuario_id) REFERENCES usuarios (id),
-        FOREIGN KEY (ruta_id) REFERENCES rutas (id),
-        UNIQUE(usuario_id, ruta_id)
-    )
-    ''')
-    
     conn.commit()
+    print("✅ Tablas creadas correctamente")
     return conn
 
 def migrar_datos():
-    try:
-        # Leer el archivo JSON
-        with open('usuarios.json', 'r', encoding='utf-8') as f:
-            usuarios = json.load(f)
-        
-        conn = crear_tablas()
-        cursor = conn.cursor()
-        
-        # Diccionario para mapear usernames a IDs
-        username_to_id = {}
-        
-        # Migrar usuarios
-        for usuario in usuarios:
-            try:
-                # Obtener valores con valores por defecto
-                nombre = usuario.get('nombre', '')
-                apellido = usuario.get('apellido', '')
-                email = usuario.get('email', '')
-                username = usuario.get('username', '')
-                password = usuario.get('password', '')
-                telefono = usuario.get('telefono', '')
-                fecha_nacimiento = usuario.get('fecha_nacimiento', datetime.now().isoformat())
-                ciudad = usuario.get('ciudad', '')
-                fecha_registro = usuario.get('fecha_registro') or datetime.now().isoformat()
-                
+    """
+    Migra los datos de usuarios y rutas desde el archivo JSON a la base de datos SQLite.
+
+    Lee el archivo usuarios.json, inserta los usuarios y sus rutas asociadas en la base de datos,
+    y crea las relaciones correspondientes.
+
+    Returns
+    -------
+    bool
+        True si la migración fue exitosa, False si hubo algún error.
+    """
+    if not os.path.exists(JSON_PATH):
+        print(f"❌ No se encontró el archivo {JSON_PATH}")
+        return False
+    with open(JSON_PATH, 'r', encoding='utf-8') as f:
+        usuarios = json.load(f)
+    conn = crear_tablas()
+    cursor = conn.cursor()
+    usuarios_migrados = 0
+    rutas_migradas = 0
+    for usuario in usuarios:
+        datos_usuario = (
+            usuario.get('nombre', ''),
+            usuario.get('apellido', ''),
+            usuario.get('email', ''),
+            usuario.get('username', ''),
+            usuario.get('password', ''),  
+            usuario.get('telefono', ''),
+            usuario.get('fecha_nacimiento', ''),
+            usuario.get('ciudad', ''),
+            datetime.now().isoformat()
+        )
+        cursor.execute('''
+            INSERT OR REPLACE INTO usuarios (
+                nombre, apellido, email, username, password_hash,
+                telefono, fecha_nacimiento, ciudad, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', datos_usuario)
+        user_id = cursor.lastrowid
+        usuarios_migrados += 1
+        rutas = usuario.get('rutas', [])
+        if isinstance(rutas, list):
+            for nombre_ruta in rutas:
                 cursor.execute('''
-                INSERT INTO usuarios (
-                    nombre, apellido, email, username, password, telefono,
-                    fecha_nacimiento, ciudad, fecha_registro
-                )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT OR REPLACE INTO rutas (
+                        nombre, origen, destino, puntos_intermedios,
+                        modo, distancia_km, duracion_horas, dificultad,
+                        created_at, creador
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''', (
-                    nombre,
-                    apellido,
-                    email,
-                    username,
-                    password,
-                    telefono,
-                    fecha_nacimiento,
-                    ciudad,
-                    fecha_registro
+                    nombre_ruta,
+                    json.dumps({"lat": 0, "lng": 0}),
+                    json.dumps({"lat": 0, "lng": 0}),
+                    json.dumps([]),
+                    'walk',
+                    0.0,
+                    0.0,
+                    'media',
+                    datetime.now().isoformat(),
+                    usuario.get('username', '')
                 ))
-                
-                # Guardar el ID del usuario
-                user_id = cursor.lastrowid
-                username_to_id[username] = user_id
-                
-                # Migrar rutas del usuario
-                rutas = usuario.get('rutas', [])
-                for ruta_nombre in rutas:
-                    try:
-                        # Verificar si la ruta ya existe
-                        cursor.execute('SELECT id FROM rutas WHERE nombre = ?', (ruta_nombre,))
-                        ruta_existente = cursor.fetchone()
-                        
-                        if not ruta_existente:
-                            # Crear la ruta si no existe
-                            cursor.execute('''
-                            INSERT INTO rutas (
-                                nombre, descripcion, distancia, duracion,
-                                dificultad, puntos_interes, origen, destino, modo_transporte
-                            )
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                            ''', (
-                                ruta_nombre,
-                                f"Descripción de {ruta_nombre}",
-                                0.0,  # distancia por defecto
-                                0,    # duración por defecto
-                                'media',  # dificultad por defecto
-                                json.dumps([]),  # puntos de interés vacíos
-                                'Origen',  # origen por defecto
-                                'Destino',  # destino por defecto
-                                'walk'  # modo de transporte por defecto
-                            ))
-                            ruta_id = cursor.lastrowid
-                        else:
-                            ruta_id = ruta_existente[0]
-                        
-                        # Asignar la ruta al usuario
-                        cursor.execute('''
-                        INSERT OR IGNORE INTO rutas_usuario (usuario_id, ruta_id)
-                        VALUES (?, ?)
-                        ''', (user_id, ruta_id))
-                        
-                    except sqlite3.IntegrityError as e:
-                        print(f"Error al insertar ruta {ruta_nombre}: {e}")
-                
-                print(f"Usuario {username} migrado exitosamente")
-                
-            except sqlite3.IntegrityError as e:
-                print(f"Error al insertar usuario {username}: {e}")
-            except Exception as e:
-                print(f"Error inesperado con usuario {username}: {e}")
-        
-        # Migrar amistades
-        for usuario in usuarios:
-            username = usuario.get('username')
-            if username in username_to_id:
-                user_id = username_to_id[username]
-                amigos = usuario.get('amigos', [])
-                
-                for amigo_username in amigos:
-                    if amigo_username in username_to_id:
-                        amigo_id = username_to_id[amigo_username]
-                        try:
-                            cursor.execute('''
-                            INSERT OR IGNORE INTO amistades (usuario_id, amigo_id)
-                            VALUES (?, ?)
-                            ''', (user_id, amigo_id))
-                        except sqlite3.IntegrityError as e:
-                            print(f"Error al insertar amistad entre {username} y {amigo_username}: {e}")
-        
-        conn.commit()
-        conn.close()
-        print("Migración completada exitosamente!")
-        
-    except Exception as e:
-        print(f"Error general durante la migración: {e}")
+                cursor.execute('''
+                    INSERT OR REPLACE INTO usuario_rutas (
+                        usuario_id, nombre_ruta, created_at
+                    ) VALUES (?, ?, ?)
+                ''', (
+                    user_id,
+                    nombre_ruta,
+                    datetime.now().isoformat()
+                ))
+                rutas_migradas += 1
+        print(f"✅ Usuario {usuario.get('username', '')} migrado correctamente")
+    conn.commit()
+    conn.close()
+    print(f"\n📊 Resumen de la migración:")
+    print(f"✅ Usuarios migrados: {usuarios_migrados}")
+    print(f"✅ Rutas migradas: {rutas_migradas}")
+    print("✨ Migración completada exitosamente!")
+    return True
 
 if __name__ == "__main__":
-    migrar_datos() 
+    """
+    Ejecuta el proceso de migración de datos desde el archivo JSON a la base de datos.
+
+    Imprime mensajes de estado y resumen al finalizar.
+    """
+    print("🚀 Iniciando proceso de migración...")
+    print(f"📁 Ruta de la base de datos: {DB_PATH}")
+    print(f"📄 Ruta del archivo JSON: {JSON_PATH}")
+    if migrar_datos():
+        print("✨ Migración completada con éxito")
+    else:
+        print("❌ La migración no se completó correctamente") 

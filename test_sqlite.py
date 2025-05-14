@@ -1,116 +1,98 @@
+import requests
+import json
+from datetime import datetime
 import sqlite3
+import os
 
-DB_PATH = 'miapp.db'
+# URL base de la API
+BASE_URL = "https://ra55.pythonanywhere.com"
 
-def buscar_usuario(username):
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM usuarios WHERE username = ?", (username,))
-    usuario = cursor.fetchone()
-    conn.close()
-    return usuario
-
-def rutas_de_usuario(username):
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT r.nombre
-        FROM rutas r
-        JOIN rutas_usuario ru ON r.id = ru.ruta_id
-        JOIN usuarios u ON ru.usuario_id = u.id
-        WHERE u.username = ?
-    """, (username,))
-    rutas = [row['nombre'] for row in cursor.fetchall()]
-    conn.close()
-    return rutas
-
-def amigos_de_usuario(username):
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute("SELECT id FROM usuarios WHERE username = ?", (username,))
-    usuario = cursor.fetchone()
-    if not usuario:
-        return []
-    user_id = usuario['id']
-    cursor.execute("""
-        SELECT u.username
-        FROM usuarios u
-        JOIN amistades a ON a.amigo_id = u.id
-        WHERE a.usuario_id = ?
-    """, (user_id,))
-    amigos = [row['username'] for row in cursor.fetchall()]
-    conn.close()
-    return amigos
-
-def insertar_usuario(nombre, apellido, email, username, telefono, fecha_nacimiento, ciudad, password):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    try:
-        cursor.execute('''
-            INSERT INTO usuarios (nombre, apellido, email, username, password, telefono, fecha_nacimiento, ciudad, fecha_registro)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-        ''', (nombre, apellido, email, username, password, telefono, fecha_nacimiento, ciudad))
-        conn.commit()
-        print(f"Usuario '{username}' insertado correctamente.")
-    except sqlite3.IntegrityError as e:
-        print(f"No se pudo insertar el usuario: {e}")
-    finally:
-        conn.close()
-
-def borrar_usuario(username):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM usuarios WHERE username = ?", (username,))
-    conn.commit()
-    print(f"Usuario '{username}' borrado correctamente.")
-    conn.close()
+def test_sqlite_operations():
+    print("\n🔍 Iniciando pruebas de SQLite y usuarios...")
+    
+    # 1. Crear un usuario de prueba
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    usuario_prueba = {
+        "nombre": "Test",
+        "apellido": "SQLite",
+        "email": f"sqlite_test_{timestamp}@test.com",
+        "username": f"sqlite_user_{timestamp}",
+        "password": "test123",
+        "telefono": "987654321",
+        "fecha_nacimiento": "1995-01-01",
+        "ciudad": "Barcelona"
+    }
+    
+    print("\n1️⃣ Probando registro de usuario en SQLite")
+    response = requests.post(f"{BASE_URL}/api/usuarios/registro", json=usuario_prueba)
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    # 2. Verificar login del usuario creado
+    print("\n2️⃣ Probando login del usuario creado")
+    login_data = {
+        "username": usuario_prueba["username"],
+        "password": usuario_prueba["password"]
+    }
+    response = requests.post(f"{BASE_URL}/api/usuarios/login", json=login_data)
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    # 3. Crear una ruta para el usuario
+    print("\n3️⃣ Probando creación de ruta para el usuario")
+    ruta_data = {
+        "origen": {"lat": 41.3851, "lng": 2.1734, "direccion": "Barcelona"},
+        "destino": {"lat": 40.4168, "lng": -3.7038, "direccion": "Madrid"},
+        "modo": "drive",
+        "nombre": f"Ruta_SQLite_Test_{timestamp}",
+        "username": usuario_prueba["username"]
+    }
+    response = requests.post(f"{BASE_URL}/api/rutas", json=ruta_data)
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    # 4. Verificar que la ruta se asoció al usuario
+    print("\n4️⃣ Verificando rutas del usuario")
+    response = requests.get(f"{BASE_URL}/api/usuarios/{usuario_prueba['username']}/rutas")
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    # 5. Crear otro usuario para probar relaciones
+    print("\n5️⃣ Creando segundo usuario para probar relaciones")
+    usuario2_prueba = {
+        "nombre": "Test2",
+        "apellido": "SQLite2",
+        "email": f"sqlite_test2_{timestamp}@test.com",
+        "username": f"sqlite_user2_{timestamp}",
+        "password": "test123",
+        "telefono": "987654322",
+        "fecha_nacimiento": "1995-01-02",
+        "ciudad": "Madrid"
+    }
+    response = requests.post(f"{BASE_URL}/api/usuarios/registro", json=usuario2_prueba)
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    # 6. Asociar la misma ruta al segundo usuario
+    print("\n6️⃣ Asociando la misma ruta al segundo usuario")
+    ruta_data2 = {
+        "origen": {"lat": 41.3851, "lng": 2.1734, "direccion": "Barcelona"},
+        "destino": {"lat": 40.4168, "lng": -3.7038, "direccion": "Madrid"},
+        "modo": "drive",
+        "nombre": f"Ruta_SQLite_Test_{timestamp}",
+        "username": usuario2_prueba["username"]
+    }
+    response = requests.post(f"{BASE_URL}/api/rutas", json=ruta_data2)
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    # 7. Verificar relaciones de amistad
+    print("\n7️⃣ Verificando relaciones de amistad")
+    response = requests.get(f"{BASE_URL}/api/usuarios/amigos", params={"username": usuario_prueba["username"]})
+    print(f"Status Code: {response.status_code}")
+    print(f"Respuesta: {json.dumps(response.json(), indent=2, ensure_ascii=False)}")
+    
+    
 
 if __name__ == "__main__":
-    print("--- TEST: Buscar usuario existente (rare) ---")
-    usuario = buscar_usuario("rare")
-    if usuario:
-        print("Usuario encontrado:")
-        for campo in usuario.keys():
-            print(f"  {campo}: {usuario[campo]}")
-    else:
-        print("Usuario no encontrado")
-
-    print("\n--- TEST: Mostrar rutas de usuario (rare) ---")
-    print(rutas_de_usuario("rare"))
-
-    print("\n--- TEST: Mostrar amigos de usuario (rare) ---")
-    print(amigos_de_usuario("rare"))
-
-    print("\n--- TEST: Insertar usuario nuevo (testuser) ---")
-    insertar_usuario(
-        nombre="Test",
-        apellido="User",
-        email="testuser@example.com",
-        username="testuser",
-        telefono="600000000",
-        fecha_nacimiento="2000-01-01",
-        ciudad="TestCity",
-        password="testpass"
-    )
-
-    print("\n--- TEST: Comprobar que testuser aparece ---")
-    usuario = buscar_usuario("testuser")
-    if usuario:
-        print("Usuario testuser encontrado:")
-        for campo in usuario.keys():
-            print(f"  {campo}: {usuario[campo]}")
-    else:
-        print("Usuario testuser NO encontrado")
-
-    print("\n--- TEST: Borrar usuario testuser ---")
-    borrar_usuario("testuser")
-
-    print("\n--- TEST: Comprobar que testuser ya NO aparece ---")
-    usuario = buscar_usuario("testuser")
-    if usuario:
-        print("ERROR: testuser sigue en la base de datos")
-    else:
-        print("OK: testuser ya no está en la base de datos") 
+    test_sqlite_operations() 

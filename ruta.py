@@ -6,6 +6,7 @@ import networkx as nx
 import time
 from geocodificador import Geocodificador
 from utils import *
+import os
 
 class Ruta:
     """
@@ -89,49 +90,100 @@ class Ruta:
         self.fecha_registro = datetime.now()
         self.modo_transporte = modo_transporte
         self.geocodificador: Geocodificador = Geocodificador()
+        self.timestamp = int(time.time())
 
         # Nombres originales para guardar en JSON
         self.origen_nombre = origen
         self.destino_nombre = destino
-        self.puntos_intermedios_nombres = puntos_intermedios.copy()
+        self.puntos_intermedios_nombres = puntos_intermedios.copy() if puntos_intermedios else []
 
         # Obtener coordenadas
-        self.origen = self.geocodificador.obtener_coordenadas(origen)
-        self.destino = self.geocodificador.obtener_coordenadas(destino)
-        self.puntos_intermedios = [
-            self.geocodificador.obtener_coordenadas(p) for p in puntos_intermedios
-            if self.geocodificador.obtener_coordenadas(p)
-        ]
+        try:
+            self.origen = self.geocodificador.obtener_coordenadas(origen)
+            if not self.origen:
+                raise ValueError(f"No se pudo geocodificar el origen: {origen}")
+            
+            self.destino = self.geocodificador.obtener_coordenadas(destino)
+            if not self.destino:
+                raise ValueError(f"No se pudo geocodificar el destino: {destino}")
+            
+            self.puntos_intermedios = []
+            for punto in self.puntos_intermedios_nombres:
+                coords = self.geocodificador.obtener_coordenadas(punto)
+                if coords:
+                    self.puntos_intermedios.append(coords)
+                else:
+                    print(f"Advertencia: No se pudo geocodificar el punto intermedio: {punto}")
+            
+            # Calcular rutas y grafo
+            self.calcular_rutas_y_grafo()
+            
+        except Exception as e:
+            raise Exception(f"Error al inicializar la ruta: {str(e)}")
 
-        self.timestamp = int(time.time())
-        self.grafo: Optional[nx.MultiDiGraph] = None
-        self.nodos: List[int] = []
-        self.rutas: List[List[int]] = []
-        self.distancias: List[float] = []
-        self.tiempos_estimados: List[float] = []
+    def calcular_rutas_y_grafo(self):
+        """Calcula el grafo y las rutas óptimas entre los puntos."""
+        try:
+            # Crear grafo centrado en el origen
+            self.grafo = ox.graph_from_point(self.origen, dist=5000, network_type=self.modo_transporte)
+            nodo_origen = ox.nearest_nodes(self.grafo, self.origen[1], self.origen[0])
+            nodo_destino = ox.nearest_nodes(self.grafo, self.destino[1], self.destino[0])
+            nodos_intermedios = [ox.nearest_nodes(self.grafo, p[1], p[0]) for p in self.puntos_intermedios]
+            ruta_nodos = [nodo_origen] + nodos_intermedios + [nodo_destino]
+            self.rutas = []
+            self.distancias = []
+            self.tiempos_estimados = []
+            for i in range(len(ruta_nodos) - 1):
+                subruta = nx.shortest_path(self.grafo, ruta_nodos[i], ruta_nodos[i + 1], weight='length')
+                self.rutas.append(subruta)
+                distancia_km = nx.shortest_path_length(self.grafo, ruta_nodos[i], ruta_nodos[i + 1], weight='length') / 1000
+                self.distancias.append(distancia_km)
+                velocidad = {'walk': 5, 'bike': 15, 'drive': 60}
+                tiempo_horas = distancia_km / velocidad[self.modo_transporte]
+                self.tiempos_estimados.append(tiempo_horas)
+        except Exception as e:
+            print(f"⚠️ Error al calcular rutas y grafo: {str(e)}")
+            self.grafo = None
+            self.rutas = []
+            self.distancias = []
+            self.tiempos_estimados = []
 
-    def calcular_distancia(self) -> float:
-        """
-        Calcula la distancia total de la ruta usando el camino más corto entre cada par de puntos.
+    def calcular_metricas(self):
+        """Calcula la distancia y duración de la ruta."""
+        try:
+            self.distancia = sum(self.distancias) if hasattr(self, 'distancias') else 0
+            velocidades = {'walk': 5, 'bike': 15, 'drive': 60}
+            velocidad = velocidades.get(self.modo_transporte, 5)
+            self.duracion = self.distancia / velocidad if velocidad > 0 else 0
+            if self.distancia < 2:
+                self.dificultad = "bajo"
+            elif self.distancia < 5:
+                self.dificultad = "medio"
+            else:
+                self.dificultad = "alto"
+                
+        except Exception as e:
+            raise Exception(f"Error al calcular métricas: {str(e)}")
 
-        Returns
-        -------
-        float
-            Distancia total en kilómetros.
-        """
-        self.grafo = ox.graph_from_point(self.origen, dist=5000, network_type=self.modo_transporte)
-
-        nodo_origen = ox.nearest_nodes(self.grafo, self.origen[1], self.origen[0])
-        nodo_destino = ox.nearest_nodes(self.grafo, self.destino[1], self.destino[0])
-        nodos_intermedios = [ox.nearest_nodes(self.grafo, p[1], p[0]) for p in self.puntos_intermedios]
-
-        ruta_nodos = [nodo_origen] + nodos_intermedios + [nodo_destino]
-
-        distancia_total = 0
-        for i in range(len(ruta_nodos) - 1):
-            distancia_total += nx.shortest_path_length(self.grafo, ruta_nodos[i], ruta_nodos[i + 1], weight='length')
-
-        return distancia_total / 1000
+    def calcular_distancia(self, punto1, punto2):
+        """Calcula la distancia en kilómetros entre dos puntos."""
+        from math import radians, sin, cos, sqrt, atan2
+        
+        R = 6371  # Radio de la Tierra en km
+        
+        lat1, lon1 = punto1
+        lat2, lon2 = punto2
+        
+        lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+        
+        dlat = lat2 - lat1
+        dlon = lon2 - lon1
+        
+        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1-a))
+        distancia = R * c
+        
+        return distancia
 
     def calcular_dificultad(self) -> str:
         """
@@ -173,60 +225,77 @@ class Ruta:
         Calcula propiedades de la ruta y guarda los datos en un archivo JSON.
         Además, genera los archivos GPX, HTML, PDF y PNG correspondientes.
         """
-        self.distancia = self.calcular_distancia()
-        self.dificultad = self.calcular_dificultad()
-        self.duracion = self.calcular_duracion()
+        try:
+            # Formatear distancia y duración
+            distancia_str = f"{self.distancia:.2f} km"
+            horas = int(self.duracion)
+            minutos = int((self.duracion - horas) * 60)
+            duracion_str = f"{horas} h {minutos} min" if horas > 0 else f"{minutos} min"
 
-        distancia_str = f"{self.distancia:.2f} km"
-        horas = int(self.duracion)
-        minutos = int((self.duracion - horas) * 60)
-        duracion_str = f"{horas} h {minutos} min" if horas > 0 else f"{minutos} min"
+            datos_ruta = {
+                "nombre": self.nombre,
+                "ubicacion": self.ubicacion,
+                "distancia": distancia_str,
+                "duracion": duracion_str,
+                "dificultad": self.dificultad,
+                "fecha_registro": self.fecha_registro.strftime("%Y-%m-%d %H:%M:%S"),
+                "origen": self.origen_nombre,
+                "puntos_intermedios": self.puntos_intermedios_nombres,
+                "destino": self.destino_nombre,
+                "modo_transporte": self.modo_transporte
+            }
 
-        datos_ruta = {
-            "nombre": self.nombre,
-            "ubicacion": self.ubicacion,
-            "distancia": distancia_str,
-            "duracion": duracion_str,
-            "dificultad": self.dificultad,
-            "fecha_registro": self.fecha_registro.strftime("%Y-%m-%d %H:%M:%S"),
-            "origen": self.origen_nombre,
-            "puntos_intermedios": self.puntos_intermedios_nombres,
-            "destino": self.destino_nombre,
-            "modo_transporte": self.modo_transporte
-        }
-
-        with open(f"rutas/{self.nombre}.json", "w") as archivo:
-            json.dump(datos_ruta, archivo, indent=4, ensure_ascii=False)
-
-        # Cálculo de subrutas
-        nodo_origen = ox.nearest_nodes(self.grafo, self.origen[1], self.origen[0])
-        nodo_destino = ox.nearest_nodes(self.grafo, self.destino[1], self.destino[0])
-        nodos_intermedios = [ox.nearest_nodes(self.grafo, p[1], p[0]) for p in self.puntos_intermedios]
-        ruta_nodos = [nodo_origen] + nodos_intermedios + [nodo_destino]
-
-        self.rutas = []
-        self.distancias = []
-        self.tiempos_estimados = []
-
-        for i in range(len(ruta_nodos) - 1):
+            # Asegurar que el directorio existe
             try:
-                subruta = nx.shortest_path(self.grafo, ruta_nodos[i], ruta_nodos[i + 1], weight='length')
-                self.rutas.append(subruta)
-
-                distancia_km = nx.shortest_path_length(self.grafo, ruta_nodos[i], ruta_nodos[i + 1], weight='length') / 1000
-                self.distancias.append(distancia_km)
-
-                velocidad = {'walk': 5, 'bike': 15, 'drive': 60}
-                tiempo_horas = distancia_km / velocidad[self.modo_transporte]
-                self.tiempos_estimados.append(tiempo_horas)
+                os.makedirs("rutas", exist_ok=True)
             except Exception as e:
-                print(f"⚠️ Error al calcular subruta: {e}")
+                print(f"⚠️ Error al crear el directorio 'rutas': {str(e)}")
+                raise
 
-        # Exportaciones
-        exportar_gpx(self.rutas, self.grafo, self.nombre)
-        ruta_html = generar_mapa(self.origen, self.puntos_intermedios, self.destino, self.rutas, self.grafo, self.nombre)
-        exportar_pdf(self.distancias, self.tiempos_estimados, self.modo_transporte, self.nombre, self.origen_nombre, self.puntos_intermedios_nombres, self.destino_nombre)
+            # Guardar archivo JSON
+            try:
+                with open(f"rutas/{self.nombre}.json", "w", encoding="utf-8") as archivo:
+                    json.dump(datos_ruta, archivo, indent=4, ensure_ascii=False)
+            except Exception as e:
+                print(f"⚠️ Error al guardar el archivo JSON: {str(e)}")
+                raise
 
+            # Exportar archivos adicionales SOLO si el grafo y rutas existen
+            if hasattr(self, 'grafo') and self.grafo and hasattr(self, 'rutas') and self.rutas:
+                try:
+                    if 'exportar_gpx' in globals():
+                        exportar_gpx(self.puntos_intermedios, self.nombre)
+                    else:
+                        print("⚠️ Función exportar_gpx no disponible.")
+                    if 'generar_mapa' in globals():
+                        generar_mapa(
+                            self.origen,
+                            self.puntos_intermedios,
+                            self.destino,
+                            self.rutas,
+                            self.grafo,
+                            self.nombre
+                        )
+                    else:
+                        print("⚠️ Función generar_mapa no disponible.")
+                    if 'exportar_pdf' in globals():
+                        exportar_pdf(
+                            self.distancias,
+                            self.tiempos_estimados,
+                            self.modo_transporte,
+                            self.nombre,
+                            self.origen_nombre,
+                            self.puntos_intermedios_nombres,
+                            self.destino_nombre
+                        )
+                    else:
+                        print("⚠️ Función exportar_pdf no disponible.")
+                except Exception as e:
+                    print(f"⚠️ Error al exportar archivos adicionales: {str(e)}")
+
+        except Exception as e:
+            print(f"❌ Error al guardar la ruta: {str(e)}")
+            raise Exception(f"Error al guardar la ruta: {str(e)}")
 
     @staticmethod
     def listar_rutas() -> List[dict]:
@@ -277,8 +346,8 @@ class Ruta:
         return {
             "nombre": self.nombre,
             "modo_transporte": self.modo_transporte,
-            "distancia": self.distancia_str(),
-            "duracion": self.duracion_str(),
+            "distancia": f"{self.distancia:.2f} km",
+            "duracion": f"{int(self.duracion)}h {int((self.duracion-int(self.duracion))*60)}m",
             "dificultad": self.dificultad
         }
 
